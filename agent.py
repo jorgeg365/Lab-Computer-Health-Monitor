@@ -5,6 +5,7 @@ import requests
 
 from monitor_core import (
     EmailAlerter,
+    append_alert_csv,
     MonitorSettings,
     append_alert_log,
     append_csv_row,
@@ -44,6 +45,7 @@ def main() -> None:
 
     local_csv = os.path.join("data", f"agent_metrics_{machine}.csv")
     local_alert_log = os.path.join("logs", f"agent_alerts_{machine}.log")
+    local_alert_csv = os.path.join("data", f"agent_alerts_{machine}.csv")
 
     print(f"Starting monitor agent for {machine}")
     if dashboard_url:
@@ -57,6 +59,7 @@ def main() -> None:
         if reasons:
             msg = f"{machine} critical: " + "; ".join(reasons)
             append_alert_log(local_alert_log, msg)
+            append_alert_csv(local_alert_csv, machine, reasons, metrics)
             try:
                 alerter.send_if_allowed(
                     key=f"agent:{machine}",

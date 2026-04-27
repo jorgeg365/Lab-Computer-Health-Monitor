@@ -141,6 +141,37 @@ def append_alert_log(file_path: str, message: str) -> None:
         f.write(f"{utc_now_iso()} | {message}\n")
 
 
+def append_alert_csv(
+    file_path: str,
+    machine: str,
+    reasons: List[str],
+    metrics: Dict[str, float],
+) -> None:
+    append_csv_row(
+        file_path,
+        {
+            "timestamp": utc_now_iso(),
+            "machine": machine,
+            "severity": "CRITICAL",
+            "reasons": "; ".join(reasons),
+            "cpu_percent": metrics["cpu_percent"],
+            "ram_percent": metrics["ram_percent"],
+            "disk_used_percent": metrics["disk_used_percent"],
+            "disk_free_gb": metrics["disk_free_gb"],
+        },
+        [
+            "timestamp",
+            "machine",
+            "severity",
+            "reasons",
+            "cpu_percent",
+            "ram_percent",
+            "disk_used_percent",
+            "disk_free_gb",
+        ],
+    )
+
+
 class EmailAlerter:
     def __init__(self, settings: MonitorSettings):
         self.settings = settings

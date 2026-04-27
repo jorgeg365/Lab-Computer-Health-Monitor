@@ -11,6 +11,9 @@ Monitor CPU, RAM, and disk usage across lab computers, trigger critical alerts, 
   - high CPU
   - high RAM
   - low disk free space
+- Dashboard export buttons for:
+  - all collected metrics as CSV
+  - critical alerts as CSV
 - Alert channels:
   - local log file
   - email via `smtplib` (optional)
@@ -46,6 +49,8 @@ python dashboard.py
 
 - Open: `http://localhost:5000`
 - API endpoint for agents: `POST /api/metrics`
+- Metrics CSV export: `http://localhost:5000/export/metrics.csv`
+- Critical alerts CSV export: `http://localhost:5000/export/alerts.csv`
 
 ## Run Agent (each lab PC)
 
@@ -105,7 +110,9 @@ The agent will:
 ## Data Output
 
 - Central CSV: `data/dashboard_metrics.csv`
+- Central critical alerts CSV: `data/dashboard_alerts.csv`
 - Per-agent CSV: `data/agent_metrics_<machine>.csv`
+- Per-agent critical alerts CSV: `data/agent_alerts_<machine>.csv`
 - Dashboard alerts log: `logs/dashboard_alerts.log`
 - Agent alerts log: `logs/agent_alerts_<machine>.log`
 
