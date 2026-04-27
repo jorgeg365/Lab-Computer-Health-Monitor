@@ -2,6 +2,10 @@
 
 Monitor CPU, RAM, and disk usage across lab computers, trigger critical alerts, and export metrics to CSV.
 
+## Dashboard Preview
+
+![Dashboard preview](docs/dashboard-preview.png)
+
 ## Features
 
 - Tracks CPU %, RAM %, disk used %, and disk free GB using `psutil`
